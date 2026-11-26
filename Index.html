@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The CIA Triad — Complete Cybersecurity Guide</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-content">
+      <div class="brand">
+        <span class="badge">INFOSEC CORE</span>
+        <h1>The CIA Triad</h1>
+      </div>
+      <nav class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#explorer">Interactive Triad</a>
+        <a href="#dad">CIA vs. DAD</a>
+        <a href="#simulator">SOC Quiz</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero / Overview -->
+    <section id="overview" class="hero">
+      <h2>Confidentiality, Integrity &amp; Availability</h2>
+      <p class="subtitle">
+        The foundational model guiding information security policies, risk assessments, and defensive architecture across ISO/IEC 27001 and NIST frameworks.
+      </p>
+
+      <div class="overview-grid">
+        <div class="card">
+          <h3>🔒 Confidentiality</h3>
+          <p><strong>Preventing unauthorized disclosure.</strong> Ensures sensitive data is accessible only to authorized users, processes, or systems via encryption, authentication, and least-privilege access control.</p>
+        </div>
+        <div class="card">
+          <h3>🛡️ Integrity</h3>
+          <p><strong>Preventing unauthorized alteration.</strong> Guarantees data remains accurate, trustworthy, and untampered throughout its lifecycle using cryptographic hashing, digital signatures, and audit logs.</p>
+        </div>
+        <div class="card">
+          <h3>⚡ Availability</h3>
+          <p><strong>Preventing unauthorized disruption.</strong> Ensures systems, networks, and data remain reliably accessible to authorized users when needed through redundancy, failover, and DDoS mitigation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Triad Explorer -->
+    <section id="explorer" class="explorer-section">
+      <div class="section-header">
+        <h2>Interactive Pillar &amp; Trade-Off Explorer</h2>
+        <p>Select a pillar node or a tension relationship below to inspect threats, defenses, real-world breaches, and code controls.</p>
+      </div>
+
+      <div class="explorer-grid">
+        <!-- SVG Triangle -->
+        <div class="triangle-panel card">
+          <svg viewBox="0 0 400 350" class="triad-svg" aria-label="CIA Triad Interactive Diagram">
+            <!-- Connecting Lines -->
+            <line x1="200" y1="60" x2="75" y2="280" class="tri-edge" id="edge-ci" />
+            <line x1="200" y1="60" x2="325" y2="280" class="tri-edge" id="edge-ca" />
+            <line x1="75" y1="280" x2="325" y2="280" class="tri-edge" id="edge-ia" />
+
+            <!-- Center Label -->
+            <text x="200" y="205" text-anchor="middle" class="center-label">DATA</text>
+            <text x="200" y="223" text-anchor="middle" class="center-sub">SECURITY</text>
+
+            <!-- Confidentiality Node (Top) -->
+            <g class="tri-node active" data-pillar="confidentiality" tabindex="0" role="button">
+              <circle cx="200" cy="60" r="44" class="node-bg" />
+              <text x="200" y="56" text-anchor="middle" class="node-letter">C</text>
+              <text x="200" y="74" text-anchor="middle" class="node-title">Confidentiality</text>
+            </g>
+
+            <!-- Integrity Node (Bottom Left) -->
+            <g class="tri-node" data-pillar="integrity" tabindex="0" role="button">
+              <circle cx="75" cy="280" r="44" class="node-bg" />
+              <text x="75" y="276" text-anchor="middle" class="node-letter">I</text>
+              <text x="75" y="294" text-anchor="middle" class="node-title">Integrity</text>
+            </g>
+
+            <!-- Availability Node (Bottom Right) -->
+            <g class="tri-node" data-pillar="availability" tabindex="0" role="button">
+              <circle cx="325" cy="280" r="44" class="node-bg" />
+              <text x="325" y="276" text-anchor="middle" class="node-letter">A</text>
+              <text x="325" y="294" text-anchor="middle" class="node-title">Availability</text>
+            </g>
+          </svg>
+
+          <!-- Tension / Trade-off Selector -->
+          <div class="tradeoff-controls">
+            <span class="tradeoff-label">Explore Pillar Trade-offs:</span>
+            <div class="btn-group">
+              <button class="trade-btn" data-trade="ca">C ↔ A Tension</button>
+              <button class="trade-btn" data-trade="ci">C ↔ I Synergy</button>
+              <button class="trade-btn" data-trade="ia">I ↔ A Tension</button>
+            </div>
+            <p id="tradeoff-output" class="tradeoff-text">
+              Click a trade-off button above to see how security controls balance against each other.
+            </p>
+          </div>
+        </div>
+
+        <!-- Pillar Deep-Dive Panel -->
+        <div class="details-panel card" id="pillar-details">
+          <!-- Populated dynamically by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- CIA vs DAD Comparison Table -->
+    <section id="dad" class="dad-section">
+      <div class="section-header">
+        <h2>CIA Triad vs. DAD Triad (The Threat Counterparts)</h2>
+        <p>Every protective pillar in the CIA model directly counters an adversarial failure mode in the DAD model.</p>
+      </div>
+
+      <div class="table-wrapper card">
+        <table>
+          <thead>
+            <tr>
+              <th>CIA Pillar (Defense)</th>
+              <th>DAD Counterpart (Threat)</th>
+              <th>What Goes Wrong</th>
+              <th>Primary Mitigation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong class="text-c">Confidentiality</strong></td>
+              <td><strong class="text-danger">Disclosure</strong></td>
+              <td>Unauthorized parties view, steal, or leak private records, credentials, or intellectual property.</td>
+              <td>AES-256 / TLS 1.3 encryption, RBAC, MFA, Data Loss Prevention (DLP).</td>
+            </tr>
+            <tr>
+              <td><strong class="text-i">Integrity</strong></td>
+              <td><strong class="text-danger">Alteration</strong></td>
+              <td>Data or software is maliciously modified, corrupted in transit, or injected with backdoors.</td>
+              <td>SHA-256 hashing, HMAC, digital signatures, immutable append-only logs.</td>
+            </tr>
+            <tr>
+              <td><strong class="text-a">Availability</strong></td>
+              <td><strong class="text-danger">Destruction / Denial</strong></td>
+              <td>Critical servers crash, files are wiped/ransomed, or legitimate users are locked out of services.</td>
+              <td>Load balancing, multi-region failover, 3-2-1 backups, DDoS rate limiting.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SOC Incident Triage Simulator -->
+    <section id="simulator" class="quiz-section">
+      <div class="section-header">
+        <h2>SOC Incident Triage Simulator</h2>
+        <p>Identify which primary CIA pillar is violated in each real-world security incident.</p>
+      </div>
+
+      <div class="card quiz-card">
+        <div class="quiz-top">
+          <span id="quiz-progress">Scenario 1 of 5</span>
+          <span id="quiz-score">Score: 0</span>
+        </div>
+
+        <h3 id="quiz-question" class="quiz-question">Loading scenario...</h3>
+
+        <div class="quiz-options" id="quiz-options">
+          <button class="option-btn" data-answer="Confidentiality">Confidentiality</button>
+          <button class="option-btn" data-answer="Integrity">Integrity</button>
+          <button class="option-btn" data-answer="Availability">Availability</button>
+        </div>
+
+        <div id="quiz-feedback" class="quiz-feedback hidden"></div>
+
+        <button id="next-btn" class="primary-btn hidden">Next Scenario →</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>CIA Triad Interactive Cybersecurity Reference • Built with HTML, CSS &amp; Vanilla JavaScript</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
